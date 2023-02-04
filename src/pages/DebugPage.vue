@@ -1,9 +1,9 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <Live2DView />
+    <DebugComponent />
   </q-page>
 </template>
 
 <script setup lang="ts">
-import Live2DView from 'components/Live2DView.vue';
+import DebugComponent from 'components/DebugComponent.vue';
 </script>
