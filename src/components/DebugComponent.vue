@@ -30,6 +30,18 @@
           @click="live2DStore.setExpression(index)"
         />
       </div>
+      <div class="live2d-debug-ws">
+        <p>WebSocket:</p>
+        <q-input v-model="wsAddress" label="Address">
+          <template v-slot:append>
+            <q-btn
+              :disable="wsStore.opened"
+              label="Dial"
+              @click="wsStore.dialWebSocket(wsAddress)"
+            />
+          </template>
+        </q-input>
+      </div>
     </div>
   </div>
   <Live2DView />
@@ -38,8 +50,14 @@
 <script setup lang="ts">
 import Live2DView from './Live2DView.vue';
 import { useLive2DStore, EXAMPLE_MODELS } from 'stores/live2D-store';
+import { useWsStore, DEFAULT_WS_ADDR } from 'stores/ws-store';
+import { ref } from 'vue';
 
 const live2DStore = useLive2DStore();
+
+const wsStore = useWsStore();
+
+const wsAddress = ref(DEFAULT_WS_ADDR);
 </script>
 
 <style scoped>

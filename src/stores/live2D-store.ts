@@ -154,8 +154,8 @@ export const useLive2DStore = defineStore('live2D', {
         clearInterval(this._keepMotion);
 
         // 若为 undefined 即 idle 无需维持
-        if (newMotion.group) {
-          console.log('keep motion 3', newMotion);
+        if (newMotion.group !== undefined) {
+          console.log('keep motion ', newMotion);
           this._keepMotion = setInterval(() => {
             this.startMotion(newMotion);
           }, KEEP_MOTION_INTERVAL_MS);
