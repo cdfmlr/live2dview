@@ -162,6 +162,8 @@ async function replaceModel(newModelSrc: string) {
   // addChild first, then update store!!!
   modelInView = await initLive2DModel(newModelSrc, transform);
   store.model = pixi?.stage.addChild(modelInView);
+
+  console.log('[Live2D] model replaced:', modelInView);
 }
 
 // #endregion : watch model replacement

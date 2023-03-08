@@ -1,3 +1,4 @@
+import { type } from 'os';
 import { defineStore } from 'pinia';
 import { Live2DModel } from 'pixi-live2d-display';
 
@@ -179,6 +180,42 @@ export const useLive2DStore = defineStore('live2D', {
     startMotion(motion: Motion) {
       if (!this.model || !motion.group) return;
       this.model?.motion(motion.group, motion.index, motion.priority);
+      // this.model?.internalModel.addListener('beforeModelUpdate', () => {
+      //   this.model?.internalModel.coreModel
+      // });
+
+      // lip sync
+      // this.model?.internalModel.addListener('beforeModelUpdate', () => {
+      //   const mm = this.model?.internalModel.motionManager;
+      //   const params =
+      //     mm?.motionGroups[mm.state.currentGroup ?? '']?.[
+      //       mm.state.currentIndex ?? 0
+      //     ].motions;
+      //   if (!params) {
+      //     return;
+      //   }
+      //   let i = 0; // indexOfPARAM_MOUTH_FORM
+      //   for (; i < params.length; i++) {
+      //     if ('PARAM_MOUTH_FORM' in Object.values(params[i])) {
+      //       // xxx: 还有个 MOUTH_SIZE
+      //       break;
+      //     }
+      //   }
+      //   if (i > params.length) {
+      //     return;
+      //   }
+      //   for (const key in Object.keys(params[i])) {
+      //     if (Array.isArray(params[i][key])) {
+      //       for (let j = 0; j < params[i][key].length; j++) {
+      //         if (params[i][key][j] == 0) {
+      //           params[i][key][j] = Math.random() * 2 - 1;
+      //         }
+      //       }
+      //     }
+      //   }
+
+      //   this.model?.internalModel.removeListener('beforeModelUpdate');
+      // });
     },
     /**
      * Apply an expression to the model without changing the current state (expression).
