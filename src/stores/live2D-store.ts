@@ -5,8 +5,7 @@ import { Live2DModel } from 'pixi-live2d-display';
 // consts
 
 /** an example v2 model source */
-const SHIZUKU_MODEL =
-  'https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json';
+const SHIZUKU_MODEL = '/shizuku/shizuku.model.json'; // in public
 
 /** an example v4 model source */
 const HARU_MODEL =
