@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { useLive2DStore } from './live2D-store';
 
-export const DEFAULT_WS_ADDR = 'ws://localhost:9001/live2d';
+export const DEFAULT_DRIVER_WS_ADDR = process.env.DEFAULT_DRIVER_WS_ADDR || 'ws://localhost:9001/live2d';
+console.log('DEFAULT_DRIVER_WS_ADDR', DEFAULT_DRIVER_WS_ADDR);
 
 const live2DStore = useLive2DStore();
 
@@ -12,7 +13,7 @@ export const useWsStore = defineStore('ws', () => {
   const opened = computed(() => ws.value?.readyState === WebSocket.OPEN);
   const closed = computed(() => ws.value?.readyState === WebSocket.CLOSED);
 
-  function dialWebSocket(address: string = DEFAULT_WS_ADDR) {
+  function dialWebSocket(address: string = DEFAULT_DRIVER_WS_ADDR) {
     console.log('dailWebSocket:', address);
 
     ws.value = new WebSocket(address);

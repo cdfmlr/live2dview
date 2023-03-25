@@ -50,14 +50,14 @@
 <script setup lang="ts">
 import Live2DView from './Live2DView.vue';
 import { useLive2DStore, EXAMPLE_MODELS } from 'stores/live2D-store';
-import { useWsStore, DEFAULT_WS_ADDR } from 'stores/ws-store';
+import { useWsStore, DEFAULT_DRIVER_WS_ADDR } from 'stores/ws-store';
 import { ref } from 'vue';
 
 const live2DStore = useLive2DStore();
 
 const wsStore = useWsStore();
 
-const wsAddress = ref(DEFAULT_WS_ADDR);
+const wsAddress = ref(DEFAULT_DRIVER_WS_ADDR);
 </script>
 
 <style scoped>

@@ -31,7 +31,7 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
       'i18n',
-      
+
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -69,7 +69,11 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        DEFAULT_DRIVER_WS_ADDR: process.env.DEFAULT_DRIVER_WS_ADDR
+        // 后者可以在编译时从环境变量中获取，赋给前者
+        // 使之能在运行时业务代码 (src) 中通过 process.env.DEFAULT_DRIVER_WS_ADDR 取得
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

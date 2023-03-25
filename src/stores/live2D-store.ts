@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { defineStore } from 'pinia';
 import { Live2DModel } from 'pixi-live2d-display';
 
