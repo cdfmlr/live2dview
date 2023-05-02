@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
 });
 
 setInterval(() => {
-  if (!wsStore.connected) {
+  if (!wsStore.connected()) {
     console.log('no controllers connected. trying to connect...');
     connectToControllers();
   }

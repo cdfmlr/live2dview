@@ -17,7 +17,11 @@ export const useWsStore = defineStore('ws', () => {
   const closed = computed(() => ws.value?.readyState === WebSocket.CLOSED);
 
   /** WebSocket connection status */
-  const connected = computed(() => _connected);
+  // const connected = computed(() => _connected);
+  // emm, 不知道为啥 computed 看不到变化，姑且先用个 action 吧，能跑就行哈哈哈。
+  function connected(): boolean {
+    return _connected;
+  }
 
   function dialWebSocket(address: string = DEFAULT_DRIVER_WS_ADDR) {
     console.log('dailWebSocket:', address);
@@ -79,8 +83,8 @@ export const useWsStore = defineStore('ws', () => {
     // getters
     opened,
     closed,
-    connected,
     // actions
+    connected,
     dialWebSocket,
     closeWebSocket,
   };
