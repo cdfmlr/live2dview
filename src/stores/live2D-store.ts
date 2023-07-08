@@ -256,6 +256,11 @@ export const useLive2DStore = defineStore('live2D', {
       this.model.internalModel?.motionManager?.stopAllMotions();
       clearInterval(this._keepMotion);
 
+      // 张嘴幅度和 volume 正相关
+      if (s.volume === undefined) {
+        s.volume = 1;
+      }
+
       if (s.motion) {
         if (typeof s.motion === 'string') {
           s.motion = {
@@ -274,8 +279,10 @@ export const useLive2DStore = defineStore('live2D', {
         this.model.speak(s.audio, s.volume, s.expression);
       }
 
-      this.isSpeaking = true;
+      // this.isSpeaking = true;
       console.log('speak start');
+
+      // TODO: 反馈机制: SpeakStart, SpeakFinish
 
       // // XXX: 曾观察到这里的 once 立即执行到的情况
       // //      可能是前一个动作的终止？
