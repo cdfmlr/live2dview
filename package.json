@@ -37,5 +37,13 @@
     "node": "^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
+  },
+  "overrides": {
+    "pixi-live2d-display": "RaSan147/pixi-live2d-display#v1.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "pixi-live2d-display": "RaSan147/pixi-live2d-display#v1.0.5"
+    }
   }
 }

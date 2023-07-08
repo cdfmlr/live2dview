@@ -164,6 +164,9 @@ async function replaceModel(newModelSrc: string) {
   store.model = pixi?.stage.addChild(modelInView);
 
   console.log('[Live2D] model replaced:', modelInView);
+
+  // console.log(store.model);
+  // console.log(store.model.internalModel);
 }
 
 // #endregion : watch model replacement
