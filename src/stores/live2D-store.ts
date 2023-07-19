@@ -49,6 +49,8 @@ export class Live2DState {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   _keepMotion?: ReturnType<typeof setInterval> | any;
+
+  isSpeaking?: boolean;
 }
 
 /**
@@ -69,6 +71,16 @@ export interface Motion {
   group?: string;
   index?: number;
   priority?: MotionPriority;
+}
+
+export interface Speaking {
+  audio?: string;
+
+  text?: string;
+  volume?: number;
+
+  expression?: string | number;
+  motion?: string | Motion;
 }
 
 function motionManagerStateToMotion(state?: {
@@ -231,6 +243,53 @@ export const useLive2DStore = defineStore('live2D', {
     startExpression(id?: string | number | undefined) {
       if (!this.model) return;
       this.model?.expression(id);
+    },
+    /**
+     * Speak with lip sync.
+     *
+     * @param s Speaking.
+     * @returns void
+     */
+    speak(s: Speaking) {
+      if (!this.model) return;
+
+      this.model.internalModel?.motionManager?.stopAllMotions();
+      clearInterval(this._keepMotion);
+
+      // 张嘴幅度和 volume 正相关
+      if (s.volume === undefined) {
+        s.volume = 1;
+      }
+
+      if (s.motion) {
+        if (typeof s.motion === 'string') {
+          s.motion = {
+            group: s.motion,
+          };
+        }
+        this.model.motion(
+          s.motion.group,
+          s.motion.index || 0,
+          s.motion.priority,
+          s.audio,
+          s.volume,
+          s.expression
+        );
+      } else {
+        this.model.speak(s.audio, s.volume, s.expression);
+      }
+
+      // this.isSpeaking = true;
+      console.log('speak start');
+
+      // TODO: 反馈机制: SpeakStart, SpeakFinish
+
+      // // XXX: 曾观察到这里的 once 立即执行到的情况
+      // //      可能是前一个动作的终止？
+      // this.model.internalModel?.motionManager?.once('motionFinish', () => {
+      //   console.log('motionFinish: speak end');
+      //   this.isSpeaking = false;
+      // });
     },
   },
 });

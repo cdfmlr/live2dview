@@ -62,6 +62,10 @@ export const useWsStore = defineStore('ws', () => {
         console.log('ws onmessage data.expression:', data.expression);
         live2DStore.setExpression(data.expression);
       }
+      if (data.speak) {
+        console.log('ws onmessage data.speak:', data.speak);
+        live2DStore.speak(data.speak);
+      }
     };
     ws.value.onerror = (event: Event) => {
       console.log('ws onerror:', event);

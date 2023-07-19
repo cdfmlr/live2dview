@@ -42,6 +42,23 @@
           </template>
         </q-input>
       </div>
+      <div class="live2d-debug-speak">
+        <p>Speak:</p>
+        <div class="row">
+          <q-input v-model="speaking.audio" label="Audio" />
+          <q-input v-model="speaking.text" label="Text" />
+          <q-input v-model="speaking.volume" label="Volume" />
+        </div>
+        <div class="row">
+          <q-input v-model="speaking.expression" label="Expression" />
+          <q-input v-model="speaking.motion" label="Motion" />
+          <q-btn
+            style="align-self: center; margin-inline-start: 32px"
+            label="Speak"
+            @click="speak()"
+          />
+        </div>
+      </div>
     </div>
   </div>
   <Live2DView />
@@ -58,6 +75,23 @@ const live2DStore = useLive2DStore();
 const wsStore = useWsStore();
 
 const wsAddress = ref(DEFAULT_DRIVER_WS_ADDR);
+
+const speaking = ref({
+  audio: '',
+  text: '',
+  volume: '',
+  expression: '',
+  motion: '',
+});
+
+function speak() {
+  console.log('speak', speaking.value);
+  live2DStore.speak({
+    ...speaking.value,
+    volume: Number(speaking.value.volume),
+  });
+}
+
 </script>
 
 <style scoped>
